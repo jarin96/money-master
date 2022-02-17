@@ -23,9 +23,11 @@ document.getElementById('calculate-button').addEventListener('click', function (
     const clothAmount = clothInput.value;
     const totalExpe = document.getElementById('total-expence');
     const totalExpeText = totalExpe.innerText;
-    totalExp.innerText = clothAmount;
+    totalExpe.innerText = clothAmount;
+    // clear input field
+    clothInput.value = '';
     // console.log(totalExpeText);
-    const totalCalculation = parseFloat(totalExpeText) + parseFloat(totalExpText) + parseFloat(totalExpeText);
-    console.log(totalCalculation);
+    const totalCalculation = parseFloat(foodAmount) + parseFloat(rentAmount) + parseFloat(clothAmount);
+    totalExpe.innerText = totalCalculation;
 
 })
