@@ -1,28 +1,21 @@
-document.getElementById('calculate-button').addEventListener('click', function () {
-    const foodInput = document.getElementById('food-input');
+function getInputValue(inputId) {
+    const foodInput = document.getElementById(inputId);
     const foodAmount = foodInput.value;
-    // console.log(incomeAmount);
-    // get current income
+    return foodAmount;
+}
+document.getElementById('calculate-button').addEventListener('click', function () {
+    const foodAmount = getInputValue('food-input');
+    // get current food
     const totalExpence = document.getElementById('total-expence');
     totalExpence.innerText = foodAmount;
-    // console.log(totalExpenceText);
-    // clear input field
-    foodInput.value = '';
     // get current rent
-    const rentInput = document.getElementById('rent-input');
-    const rentAmount = rentInput.value;
+    const rentAmount = getInputValue('rent-input');
     const totalExp = document.getElementById('total-expence');
     totalExp.innerText = rentAmount;
-    // console.log(totalExpText);
-    // clear input field
-    rentInput.value = '';
     // get current cloth
-    const clothInput = document.getElementById('cloth-input');
-    const clothAmount = clothInput.value;
+    const clothAmount = getInputValue('cloth-input');
     const totalExpe = document.getElementById('total-expence');
     totalExpe.innerText = clothAmount;
-    // clear input field
-    clothInput.value = '';
     // console.log(totalExpeText);
     let totalCalculation = parseFloat(foodAmount) + parseFloat(rentAmount) + parseFloat(clothAmount);
     totalExpe.innerText = totalCalculation;
@@ -40,11 +33,14 @@ document.getElementById('save-btn').addEventListener('click', function () {
         const total = document.getElementById('save-price');
         const savingAmount = (10000 * 20) / 100;
         total.innerText = savingAmount;
+        const balanceTotal = document.getElementById('remain-balance');
+        const remainingBalance = balanceTotal.innerText;
+        console.log(remainingBalance);
     }
     else {
         console.log('please give 20% amount');
     }
-    const Balance = document.getElementById('remain-balance');
-    const remainingBalance = totalCalculation - savingAmount;
-    Balance.value = remainingBalance;
+    // const Balance = document.getElementById('remain-balance');
+    // const remainingBalance = totalCalculation - savingAmount;
+    // Balance.innerText = remainingBalance;
 });
