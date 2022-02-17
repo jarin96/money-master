@@ -1,52 +1,73 @@
-// Income and Expense Calculation Here
+
+// Get Value of Income
+
+function getIncomeAmount() {
+    let incomeInput = document.getElementById('income-input');
+    let incomeInputValue = incomeInput.value;
+    let incomeInputAmount = parseFloat(incomeInputValue);
+
+    if (incomeInputAmount < 0) {
+        alert('Can not enter any number less than zero. Try again');
+    }
+
+    return incomeInputAmount;
+}
+
+//  Get Value of Expense
+
+function getInputValues() {
+
+    let foodInput = document.getElementById('food-input');
+    let foodInputValue = foodInput.value;
+    let foodInputAmount = parseFloat(foodInputValue);
+
+    let rentInput = document.getElementById('rent-input');
+    let rentInputValue = rentInput.value;
+    let rentInputAmount = parseFloat(rentInputValue);
+
+    let clothInput = document.getElementById('cloth-input');
+    let clothInputValue = clothInput.value;
+    let clothInputAmount = parseFloat(clothInputValue);
+
+    const totalExpense = parseFloat(foodInputValue) + parseFloat(rentInputValue) + parseFloat(clothInputValue);
+
+    if (foodInputAmount < 0 || rentInputAmount < 0 || clothInputAmount < 0) {
+        alert('Can not enter any number less than zero. Try again');
+        return;
+
+    }
+
+
+    return totalExpense;
+
+}
+
+// Income and Expense Difference Calculation Here
 
 document.getElementById('calculate-button').addEventListener('click', function () {
 
-    var incomeInput = document.getElementById('income-input');
-    var incomeInputValue = incomeInput.value;
-    var incomeInputAmount = parseFloat(incomeInputValue);
+    const spend = getInputValues();
+
+    const earning = getIncomeAmount();
 
 
-    var foodInput = document.getElementById('food-input');
-    var foodInputValue = foodInput.value;
-    var foodInputAmount = parseFloat(foodInputValue);
+    const remainingBalance = earning - spend;
 
-    var rentInput = document.getElementById('rent-input');
-    var rentInputValue = rentInput.value;
-    var rentInputAmount = parseFloat(rentInputValue);
 
-    var clothInput = document.getElementById('cloth-input');
-    var clothInputValue = clothInput.value;
-    var clothInputAmount = parseFloat(clothInputValue);
 
-    var totalExpense = foodInputAmount + rentInputAmount + clothInputAmount;
-
-    const remainingBalance = incomeInputAmount - totalExpense;
-
-    if (incomeInputAmount < totalExpense) {
+    if (earning < spend) {
         alert('Income can not be less than expense. Enter amounts properly');
-        incomeInput.value = '';
-        foodInput.value = '';
-        rentInput.value = '';
-        clothInput.value = '';
         return;
     }
 
-    else if (incomeInputAmount < 0 || foodInputAmount < 0 || rentInputAmount < 0 || clothInputAmount < 0) {
-        alert('Can not enter any number less than zero. Try again')
+    else if (isNaN(earning) || isNaN(spend) || typeof earning == undefined || typeof spend == undefined) {
+        alert('Can not enter any input other than positive number');
+        return;
 
     }
 
-    else if (isNaN(totalExpense) || isNaN(remainingBalance)) {
-        alert('Can not enter any input other than number');
-
-    }
-
-    else {
-        document.getElementById('total-expence').innerText = totalExpense;
-        document.getElementById('remaining-balance').innerText = remainingBalance;
-
-    }
+    document.getElementById('total-expence').innerText = spend;
+    document.getElementById('remaining-balance').innerText = remainingBalance;
 
 })
 
@@ -54,43 +75,49 @@ document.getElementById('calculate-button').addEventListener('click', function (
 
 document.getElementById('savings').addEventListener('click', function () {
 
-    var incomeInput = document.getElementById('income-input');
-    var incomeInputValue = incomeInput.value;
-    var incomeInputAmount = parseFloat(incomeInputValue);
-
-    var foodInput = document.getElementById('food-input');
-    var foodInputValue = foodInput.value;
-    var foodInputAmount = parseFloat(foodInputValue);
-
-    var rentInput = document.getElementById('rent-input');
-    var rentInputValue = rentInput.value;
-    var rentInputAmount = parseFloat(rentInputValue);
-
-    var clothInput = document.getElementById('cloth-input');
-    var clothInputValue = clothInput.value;
-    var clothInputAmount = parseFloat(clothInputValue);
 
 
-    var totalExpense = foodInputAmount + rentInputAmount + clothInputAmount;
+    const spend = getInputValues();
 
-    const remainingBalance = incomeInputAmount - totalExpense;
+    const earning = getIncomeAmount();
 
-    var savingsPercent = document.getElementById('savings-percent');
-    var savingsPercentValue = parseFloat(savingsPercent.value);
-    var savingsAmount = incomeInputAmount * (savingsPercentValue / 100);
-    if (remainingBalance < savingsAmount) {
-        alert('Saving amount is bigger than remaining balance. Enter valid savings percentage');
-        savingsPercent.value = '';
+
+    const remainingBalance = earning - spend;
+
+    const savingsPercent = document.getElementById('savings-percent');
+    const savingsPercentValue = parseFloat(savingsPercent.value);
+    const savingsAmount = earning * (savingsPercentValue / 100);
+    const finalAmount = remainingBalance - savingsAmount;
+
+    if (savingsPercentValue < 0) {
+        alert('Enter Valid Percentage');
         return;
     }
 
 
+    else if (remainingBalance < savingsAmount) {
+        alert('Saving amount is bigger than remaining balance. Enter valid savings percentage');
+        savingsPercent.value = '';
+        return;
+    }
+    else if (isNaN(finalAmount)) {
+        alert('Enter positive percentage value');
+        return;
+
+    }
+
     else {
+
+
         document.getElementById('savings-amount').innerText = savingsAmount;
 
 
-        var finalAmount = remainingBalance - savingsAmount;
+
+
+        // console.log(finalAmount);
         document.getElementById('remaining').innerText = finalAmount;
+
+
 
     }
 
