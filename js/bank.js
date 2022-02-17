@@ -4,7 +4,6 @@ document.getElementById('calculate-button').addEventListener('click', function (
     // console.log(incomeAmount);
     // get current income
     const totalExpence = document.getElementById('total-expence');
-    const totalExpenceText = totalExpence.innerText;
     totalExpence.innerText = foodAmount;
     // console.log(totalExpenceText);
     // clear input field
@@ -13,7 +12,6 @@ document.getElementById('calculate-button').addEventListener('click', function (
     const rentInput = document.getElementById('rent-input');
     const rentAmount = rentInput.value;
     const totalExp = document.getElementById('total-expence');
-    const totalExpText = totalExp.innerText;
     totalExp.innerText = rentAmount;
     // console.log(totalExpText);
     // clear input field
@@ -22,12 +20,16 @@ document.getElementById('calculate-button').addEventListener('click', function (
     const clothInput = document.getElementById('cloth-input');
     const clothAmount = clothInput.value;
     const totalExpe = document.getElementById('total-expence');
-    const totalExpeText = totalExpe.innerText;
     totalExpe.innerText = clothAmount;
     // clear input field
     clothInput.value = '';
     // console.log(totalExpeText);
-    const totalCalculation = parseFloat(foodAmount) + parseFloat(rentAmount) + parseFloat(clothAmount);
+    let totalCalculation = parseFloat(foodAmount) + parseFloat(rentAmount) + parseFloat(clothAmount);
     totalExpe.innerText = totalCalculation;
-
+    const incomeInput = document.getElementById('income-input');
+    const incomeAmount = incomeInput.value;
+    const totalBalance = document.getElementById('total-balance');
+    totalBalance.innerText = incomeAmount;
+    totalCalculation = incomeAmount - totalCalculation;
+    totalBalance.innerText = totalCalculation;
 })
